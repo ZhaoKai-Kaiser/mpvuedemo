@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container bg">
     <!-- 图片引用的两种方式 -->
     <img class="girl"
          :src="imgSrc +'static/img/girl.png'"
@@ -47,18 +47,11 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .userinfo {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128/7.5vw;
-  height: 128/7.5vw;
-  margin: 20/7.5vw;
-  border-radius: 50%;
 }
 
 .userinfo-nickname {
@@ -100,5 +93,10 @@ export default {
 .container .logo {
   width: 200px;
   height: 200px;
+}
+.bg {
+  width: 100%;
+  height: 100%;
+  background: $themeColor;
 }
 </style>

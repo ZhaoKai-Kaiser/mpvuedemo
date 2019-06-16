@@ -1,0 +1,6 @@
+
+.card {
+  padding: 10rpx;
+  margin: 0;
+  font-size: 100rpx;
+}

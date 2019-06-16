@@ -45,6 +45,7 @@ module.exports = {
     alias: {
       vue: 'mpvue',
       '@': resolve('src'),
+      _modules: resolve('node_modules'),
     },
     symlinks: false,
     aliasFields: ['mpvue', 'weapp', 'browser'],
@@ -80,7 +81,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.ts?$/,
+        test: /\.tsx?$/,
         loader: 'ts-loader',
         options: { appendTsSuffixTo: [/\.vue$/] },
         exclude: /node_modules/,

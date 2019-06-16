@@ -9,7 +9,7 @@ function resolve(dir) {
   return path.join(__dirname, '..', dir);
 }
 const createLintingRule = () => ({
-  test: /\.(js|vue)$/,
+  test: /\.(js|vue|ts)$/,
   loader: 'eslint-loader',
   enforce: 'pre',
   include: [resolve('src'), resolve('test')],
@@ -67,14 +67,6 @@ module.exports = {
         options: { appendTsSuffixTo: [/\.vue$/] },
         exclude: /node_modules/,
         include: [resolve('src')],
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.less$/,
-        loader: 'style-loader!css-loader!less-loader',
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

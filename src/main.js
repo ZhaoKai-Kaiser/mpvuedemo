@@ -1,46 +1,46 @@
-import Vue from 'vue'
-import App from './App'
-import store from './store'
-import wxService from './api/wxService'
-import httpService from './api/httpService'
+import Vue from 'vue';
+import App from './App';
+import store from './store';
+import wxService from './api/wxService';
 
-Vue.config.productionTip = false
-App.mpType = 'app'
-Vue.prototype.$store = store
+Vue.config.productionTip = false;
+App.mpType = 'app';
+Vue.prototype.$store = store;
 
 Vue.mixin({
   data() {
     return {
       service: '',
       router: '/',
-      imgSrc: '/'
-    }
+      imgSrc: '/',
+    };
   },
   methods: {
-      newroot () { //
-          return this.$root.$mp
-      },
-      navigatePageTo (url) {
-          wx.navigateTo({url: url})
-      },
-      reLaunchPageTo (url) {
-          wx.reLaunch({url: url})
-      },
-      setStorageSync (name, data) {
-          wx.setStorageSync(name, data)
-      },
-      getStorageSync (name) {
-          return wx.getStorageSync(name)
-      }
+    newroot() {
+      //
+      return this.$root.$mp;
+    },
+    navigatePageTo(url) {
+      wx.navigateTo({ url });
+    },
+    reLaunchPageTo(url) {
+      wx.reLaunch({ url });
+    },
+    setStorageSync(name, data) {
+      wx.setStorageSync(name, data);
+    },
+    getStorageSync(name) {
+      return wx.getStorageSync(name);
+    },
   },
   created() {
-      // console.log('wx')
-      this.service = wxService
-  }
-})
+    // console.log('wx')
+    this.service = wxService;
+  },
+});
 
-const app = new Vue(App)
-app.$mount()
+const app = new Vue(App);
+app.$mount();
 
 export default {
   // 这个字段走 app.json
@@ -51,7 +51,7 @@ export default {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'mpvue demo',
-      navigationBarTextStyle: 'black'
-    }
-  }
-}
+      navigationBarTextStyle: 'black',
+    },
+  },
+};

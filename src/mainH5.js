@@ -8,6 +8,7 @@ import httpService from './api/httpService';
 import store from './store';
 
 import '@/utils/flexible';
+import './style/common.css';
 
 Vue.config.productionTip = false;
 Vue.use(Vuex);

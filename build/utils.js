@@ -31,6 +31,15 @@ exports.cssLoaders = function(options) {
     },
   };
 
+  // https://github.com/shakacode/sass-resources-loader
+  const sassResourcesLoader = {
+    loader: 'sass-resources-loader',
+    options: {
+      // Provide path to the file with resources
+      resources: [path.resolve(__dirname, './../src/style/theme.scss')],
+    },
+  };
+
   // generate loader string to be used with extract text plugin
   function generateLoaders(loader, loaderOptions) {
     var loaders = [cssLoader, postcssLoader];
@@ -41,6 +50,10 @@ exports.cssLoaders = function(options) {
           sourceMap: options.sourceMap,
         }),
       });
+      // 追加sass-resources-loaders
+      if (['sass', 'scss'].includes(loader)) {
+        loaders.push(sassResourcesLoader);
+      }
     }
 
     // Extract CSS when that option is specified

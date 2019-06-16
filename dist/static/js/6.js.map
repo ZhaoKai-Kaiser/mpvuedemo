@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/utils/test.ts"],"names":[],"mappings":";;;;;;AAAA;AAAA;AACA;AACA;AACA","file":"static/js/6.js","sourcesContent":["function greeter(person) {\n    console.log(\"Hello \" + person);\n}\nexport default greeter;\n\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./src/utils/test.ts\n// module id = 115\n// module chunks = 6"],"sourceRoot":""}
