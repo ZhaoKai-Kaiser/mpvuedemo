@@ -1,11 +1,12 @@
-'use strict'
-const path = require('path')
-const utils = require('./utils')
-const config = require('../configH5')
-const vueLoaderConfig = require('./vue-loader.conf')
+const path = require('path');
+const utils = require('./utils');
+const config = require('../configH5');
+const vueLoaderConfig = require('./vue-loader.conf');
 
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
+process.env.BROWSER_ENV = 'h5';
+
+function resolve(dir) {
+  return path.join(__dirname, '..', dir);
 }
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
@@ -14,28 +15,30 @@ const createLintingRule = () => ({
   include: [resolve('src'), resolve('test')],
   options: {
     formatter: require('eslint-friendly-formatter'),
-    emitWarning: !config.dev.showEslintErrorsInOverlay
-  }
-})
+    emitWarning: !config.dev.showEslintErrorsInOverlay,
+  },
+});
+
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/mainH5.js'
-    // app: './module/' + enterdir + '/src/main.js'
+    app: './src/mainH5.js',
   },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? '.' + config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    publicPath:
+      process.env.NODE_ENV === 'production'
+        ? `.${config.build.assetsPublicPath}`
+        : config.dev.assetsPublicPath,
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json', '.html'],
+    extensions: ['.js', '.vue', '.json', '.html', '.ts', '.tsx'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src')
-    }
+      vue$: 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
+      _modules: resolve('node_modules'),
+    },
   },
   module: {
     rules: [
@@ -43,50 +46,61 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueLoaderConfig
+        options: vueLoaderConfig,
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
+        options: {
+          cacheDirectory: true,
+          plugins: ['dynamic-import-webpack'],
+        },
+        include: [
+          resolve('src'),
+          resolve('test'),
+          resolve('node_modules/webpack-dev-server/client'),
         ],
       },
       {
-            test: /\.less$/,
-
-            loader: "style-loader!css-loader!less-loader",
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: { appendTsSuffixTo: [/\.vue$/] },
+        exclude: /node_modules/,
+        include: [resolve('src')],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader',
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 1000,
-          name: utils.assetsPath('img/[name].[ext]?v=[hash:7]')
-        }
+          name: utils.assetsPath('img/[name].[ext]?v=[hash:7]'),
+        },
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 1000,
-          name: utils.assetsPath('media/[name].[ext]?v=[hash:7]')
-        }
+          name: utils.assetsPath('media/[name].[ext]?v=[hash:7]'),
+        },
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[ext]?v=[hash:7]')
-        }
-      }
-    ]
+          name: utils.assetsPath('fonts/[name].[ext]?v=[hash:7]'),
+        },
+      },
+    ],
   },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
@@ -98,6 +112,6 @@ module.exports = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
-    child_process: 'empty'
-  }
-}
+    child_process: 'empty',
+  },
+};

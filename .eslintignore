@@ -1,2 +1,7 @@
-build/*.js
-config/*.js
+/build/
+/buildH5/
+/config/
+/configH5/
+/dist/
+/distH5/
+/*.js

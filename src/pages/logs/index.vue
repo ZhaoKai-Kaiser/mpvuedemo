@@ -1,8 +1,11 @@
 <template>
   <div class="counter-warp">
-      <a @click="gotoGame('pages/index/main')"   class="home">去往首页</a>
+    <a @click="gotoGame('pages/index/main')"
+       class="home">去往首页</a>
     <ul class="container log-list">
-      <li v-for="(log, index) in logs" :key="index" class="log-item">
+      <li v-for="(log, index) in logs"
+          :key="index"
+          class="log-item">
         <card :text="(index + 1) + ' . ' + log"></card>
       </li>
     </ul>
@@ -10,28 +13,28 @@
 </template>
 
 <script>
-import { formatTime } from '@/utils/index'
-import card from '@/components/card'
+import { formatTime } from '@/utils/index';
+import card from '@/components/card';
 
 export default {
   components: {
-    card
+    card,
   },
-  data () {
+  data() {
     return {
-      logs: []
-    }
+      logs: [],
+    };
   },
   methods: {
-      gotoGame (path) {
-         this.reLaunchPageTo(this.router + path)
-      }
- },
-  created () {
-    const logs = (this.getStorageSync('logs') || [])
-    this.logs = logs.map(log => formatTime(new Date(log)))
-  }
-}
+    gotoGame(path) {
+      this.reLaunchPageTo(this.router + path);
+    },
+  },
+  created() {
+    const logs = (this.getStorageSync('logs') || []);
+    this.logs = logs.map(log => formatTime(new Date(log)));
+  },
+};
 </script>
 
 <style lang="less" scoped>
