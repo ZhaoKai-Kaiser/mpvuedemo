@@ -9,6 +9,7 @@ import store from './store';
 
 import '@/utils/flexible';
 import './style/common.css';
+import 'weui';
 
 Vue.config.productionTip = false;
 Vue.use(Vuex);

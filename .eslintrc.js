@@ -26,6 +26,7 @@ module.exports = {
         js: 'never',
         vue: 'never',
         ts: 'never',
+        css: 'never',
       },
     ],
     // disallow reassignment of function parameters

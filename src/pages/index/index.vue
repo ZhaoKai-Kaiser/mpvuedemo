@@ -1,5 +1,8 @@
 <template>
   <div class="container bg">
+    <!-- 使用 -->
+    <a href="javascript:;"
+       class="weui-btn weui-btn_primary">绿色按钮</a>
     <!-- 图片引用的两种方式 -->
     <img class="girl"
          :src="imgSrc +'static/img/girl.png'"
